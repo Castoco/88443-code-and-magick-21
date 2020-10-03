@@ -55,11 +55,10 @@ window.renderStatistics = function (ctx, players, times) {
 
   const resultMessage = function (message, x, y) {
     ctx.font = '16px PT Mono';
-    let text = message.split('\n');
+    const text = message.split('\n');
     for (let i = 0; i < text.length; i++) {
       ctx.fillText(text[i], x, y + (FONT_GAP * i));
     }
-    return;
   };
 
   resultMessage('Ура вы победили! \nСписок результатов: ', CLOUD_X + GAP + TEXT_WIDTH, CLOUD_Y + FONT_GAP);
