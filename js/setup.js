@@ -36,6 +36,7 @@ const EYES_COLOR = [
   'green'
 ];
 
+const BASE_WIZARDS = [];
 
 const userWindow = document.querySelector('.setup');
 userWindow.classList.remove('hidden');
@@ -59,12 +60,11 @@ const randomWizard = function () {
 };
 
 const getWizardQuantity = function (number) {
-  const baseWizards = [];
   const wizardQuantity = number;
   for (let i = 0; i < wizardQuantity; i++) {
-    baseWizards.push(randomWizard());
+    BASE_WIZARDS.push(randomWizard());
   }
-  return baseWizards;
+  return BASE_WIZARDS;
 };
 
 const wizardsTotal = getWizardQuantity(4);
