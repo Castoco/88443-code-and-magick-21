@@ -58,12 +58,16 @@ const randomWizard = function () {
   return wizards;
 };
 
-const baseWizards = [];
-const wizardQuantity = 4;
+const getWizardQuantity = function (number) {
+  const baseWizards = [];
+  const wizardQuantity = number;
+  for (let i = 0; i < wizardQuantity; i++) {
+    baseWizards.push(randomWizard());
+  }
+  return baseWizards;
+};
 
-for (let i = 0; i < wizardQuantity; i++) {
-  baseWizards.push(randomWizard());
-}
+const wizardsTotal = getWizardQuantity(4);
 
 const wizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 const similarList = document.querySelector('.setup-similar-list');
@@ -79,8 +83,8 @@ const renderWizard = function (render) {
 };
 
 const fragment = document.createDocumentFragment();
-for (let i = 0; i < baseWizards.length; i++) {
-  fragment.appendChild(renderWizard(baseWizards[i]));
+for (let i = 0; i < wizardsTotal.length; i++) {
+  fragment.appendChild(renderWizard(wizardsTotal[i]));
   similarList.appendChild(fragment);
 }
 
