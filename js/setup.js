@@ -35,8 +35,7 @@ const EYES_COLOR = [
   'yellow',
   'green'
 ];
-
-const BASE_WIZARDS = [];
+const WIZARDS_TOTAL = 4;
 
 const userWindow = document.querySelector('.setup');
 userWindow.classList.remove('hidden');
@@ -60,14 +59,15 @@ const randomWizard = function () {
 };
 
 const getWizardQuantity = function (number) {
+  const baseWizards = [];
   const wizardQuantity = number;
   for (let i = 0; i < wizardQuantity; i++) {
-    BASE_WIZARDS.push(randomWizard());
+    baseWizards.push(randomWizard());
   }
-  return BASE_WIZARDS;
+  return baseWizards;
 };
 
-const wizardsTotal = getWizardQuantity(4);
+const wizardsTotal = getWizardQuantity(WIZARDS_TOTAL);
 
 const wizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 const similarList = document.querySelector('.setup-similar-list');
