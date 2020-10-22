@@ -115,15 +115,15 @@ const openPopup = function () {
   document.addEventListener(`keydown`, onPopupEscPress);
 
   wizardEyes.addEventListener(`click`, function () {
-    setupWizardColor(eyesColor, EYES_COLOR, wizardEyes);
+    setUpWizardColor(eyesColor, EYES_COLOR, wizardEyes, eyes);
   });
 
   wizardCoat.addEventListener(`click`, function () {
-    setupWizardColor(coatColor, COAT_COLOR, wizardCoat);
+    setUpWizardColor(coatColor, COAT_COLOR, wizardCoat, coat);
   });
 
   setupFireball.addEventListener(`click`, function () {
-    setupWizardColor(fireBallColor, FIRE_BALL_COLOR, setupFireball);
+    setUpWizardColor(fireBallColor, FIRE_BALL_COLOR, setupFireball, fire);
   });
 
 };
@@ -158,8 +158,7 @@ setupUserName.addEventListener(`input`, function () {
   const valueLength = setupUserName.value.length;
 
   if (valueLength < MIN_NAME_LENGTH) {
-    setupUserName.setCustomValidity(`Еще ` + (MIN_NAME_LENGTH - valueLength) + ` cимв`
-    );
+    setupUserName.setCustomValidity(`Еще ` + (MIN_NAME_LENGTH - valueLength) + ` cимв`);
   } else if (valueLength > MAX_NAME_LENGTH) {
     setupUserName.setCustomValidity(`Удалите лишние ` + (valueLength - MAX_NAME_LENGTH) + `симв`);
   } else {
@@ -170,27 +169,35 @@ setupUserName.addEventListener(`input`, function () {
 });
 
 const wizardForm = document.querySelector(`.setup-wizard-form`);
-const SetUpWizard = wizardForm.querySelector(`.setup-wizard`);
+const setUpWizard = wizardForm.querySelector(`.setup-wizard`);
 const coatColor = wizardForm.querySelector(`input[name="coat-color"]`);
 const eyesColor = wizardForm.querySelector(`input[name="eyes-color"]`);
 const fireBallColor = wizardForm.querySelector(`input[name="fireball-color"]`);
-const wizardCoat = SetUpWizard.querySelector(`.wizard-coat`);
-const wizardEyes = SetUpWizard.querySelector(`.wizard-eyes`);
+const wizardCoat = setUpWizard.querySelector(`.wizard-coat`);
+const wizardEyes = setUpWizard.querySelector(`.wizard-eyes`);
 const setupFireball = wizardForm.querySelector(`.setup-fireball-wrap`);
 wizardCoat.style.cursor = 'pointer';
 wizardEyes.style.cursor = 'pointer';
 setupFireball.style.cursor = 'pointer';
 
 
-let coatCounter = 0;
+let colorCounter = {
+  'eyes': 0,
+  'coat': 0,
+  'fire': 0
+};
 
-const setupWizardColor = function (input, array, element) {
-  if (coatCounter === array.length) {
-    coatCounter = 0;
+let eyes = 'eyes';
+let coat = 'coat';
+let fire = 'fire';
+
+const setUpWizardColor = function (input, array, element, key) {
+  if (colorCounter[key] === array.length - 1) {
+    colorCounter[key] = 0;
   } else {
-    coatCounter++;
+    colorCounter[key]++;
   }
-  input.value = array[coatCounter];
+  input.value = array[colorCounter[key]];
   if (element === setupFireball) {
     element.style.background = input.value;
   } else {
